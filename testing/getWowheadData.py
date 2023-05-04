@@ -1,5 +1,4 @@
 import requests
-import re
 from bs4 import BeautifulSoup
 
 # item variables
@@ -8,9 +7,11 @@ itemId = "193001"
 itemName = "Elemental_Lariat"
 
 # Wowhead request
-url = f'https://www.wowhead.com/item={itemId}/{itemName}?ilvl={ilvl}'
+url = 'https://www.wowhead.com/item=137341.0/Cragshapers_Fitted_Hood?ilvl=441'
+#url = f'https://www.wowhead.com/item={itemId}/{itemName}?ilvl={ilvl}'
 response = requests.get(url)
-soup = BeautifulSoup(response.text, 'lxml')
+#soup = BeautifulSoup(response.text, 'lxml')
+soup = BeautifulSoup(response.text, 'html.parser')
 spans = soup.find_all('span')
 
 # Starting stat values
