@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # Read item_data csv file
-itemData = pd.read_csv('./item_data_evoker.csv', header=0,delimiter=',')
+itemData = pd.read_csv('./item_data_priest.csv', header=0,delimiter=',')
 itemData = itemData.fillna(0)
 
 # Read item-names.json
@@ -14,7 +14,10 @@ itemNames = itemNames.ItemSparse.apply(pd.Series)
 
 # Loop through items in itemData to get their IDs
 for index, item in enumerate(itemData['Name']):
-    itemData['id'][index] = itemNames.loc[itemNames['en_US'] == item][:1].index[0]
+    try:
+        itemData['id'][index] = itemNames.loc[itemNames['en_US'] == item][:1].index[0]
+    except:
+        itemData['id'][index] = 0
 
 # Verification step
 print(itemData)
@@ -30,7 +33,7 @@ for index, item in itemData.iterrows():
         url = f'https://www.wowhead.com/item={item["id"]}/{currentItemName}?ilvl={item["ilvl"]}'
         print(url)
         response = requests.get(url)
-        soup = BeautifulSoup(response.text, 'lxml')
+        soup = BeautifulSoup(response.text, 'html.parser')
         spans = soup.find_all('span')
 
         # Only use first value found
