@@ -10,6 +10,9 @@ A quick script to get all item data for a personal character bis list. The bis l
 * Execute main.py
 * The script will output a file called item_data_filled.csv with the following fields filled out: id, Int, Crit, Haste, Mastery, Vers
 
+# Static Item Data
+The item data is downloaded every patch from raidbots: https://www.raidbots.com/static/data/live/item-names.json. This item data is only required to automatically grad the item IDs by item name.
+
 # Error handling
 If items are not being filled out, or can not be found entirly, check the corresponding wowhead page. The script scrapes the wowhead item page for the stat info.
 
